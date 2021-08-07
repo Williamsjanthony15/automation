@@ -3,32 +3,26 @@
 
 # Import Faker
 from faker import Faker 
+import shutil
+import re
 
 #Set language for faker
 fake = Faker('en_US')
 
 # print(fake)
-
 # This tells me all of the methods i can fake with this object
 # print(dir(fake))
-
 # Random Names it will generate upon running the script
 # print(fake.name())
-
 # Random City
 # print(fake.city())
-
 # Random Credit Card
 # print(fake.credit_card())
-
 # Giving 100 Names
 # If dont want duplicates put names in set
 # First name female
 # for i in range(100):
     # print(fake.first_name_female())
-
-
-
 # Returns a string of word(s)
 # print(fake.word())
 # Returns a list of 3 words Can have as many words as you want by calling a number.
@@ -46,44 +40,38 @@ fake = Faker('en_US')
     # print(fake.email())
 #return phone number
 # print(fake.phone_number())
-
+# string = '\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$'
+string = '.\d\d\d[.-]\d\d\d[.-]\d\d\d[.-]\d\d\d\d[x,X]\d\d\d\d\d'
+# string = '/^\b\d{3}[-.]?\d{3}[-.]?\d{4}\b$/'
 
 # making a file with paragraphs, emails, and phone numbers
-para = ''
-for i in range(10):
-    para = fake.sentence(5) + ' '
 
-email = ''
+content = ''
 for i in range(10):
+    para = fake.sentence() + ' '
     email = fake.email('gmail.com')
-
-phone = ''
-for i in range(10):
     phone = fake.phone_number()
-
-content = f'{para} {email} {phone} \n'
-
-# for i in range():
-#     content
-#     # each set of data to be own line
-#     content += '\n'
-# print(content)
-
+    content += f'{para} {email} {phone} \n'
 
 #Createing a write file with content in it and put it in the assets folder
 with open('assets/paragraph.txt', 'w+') as f:
     f.write(content)
 
-#Reading the written file with the content in it
-# with open('assets/paragraph.txt', 'w+') as f:
-#     f.read()
 
+# #Reading the written file with the content in it
+with open('assets/paragraph.txt', 'r') as f:
+    results = f.read()
+    find_number = re.findall(string, content)
+
+print(find_number)
+# shutil.copy('assets/phone_numbers.txt', results)
+
+# print(find_number)
 #poetry a While reading the file, If it meets the phone numbers description Move it to Phone_Number.txt file
 # If it meets the email description move it to the Email.txt file
 
 
 # copying the created file from assets into demo folder
-# import shutil
 
 # shutil.copy('assets/notes.txt', '.')
 
