@@ -25,7 +25,7 @@ seattle = '206-'
 
    
 # read and filter out numbers from our note.txt file
-with open('assets/potential-contacts.txt', 'r+') as f:
+with open('assets/potential_contacts.txt', 'r+') as f:
     content = f.readlines()
     for line in content:
         if re_phone.search(line):
